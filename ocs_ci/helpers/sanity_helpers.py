@@ -42,7 +42,7 @@ class Sanity:
 
         ceph_health_check(namespace=config.ENV_DATA["cluster_namespace"], tries=tries)
         if cluster_check:
-            self.ceph_cluster.cluster_health_check(timeout=60)
+            self.ceph_cluster.cluster_health_check(timeout=300)
 
     def create_resources(
         self, pvc_factory, pod_factory, bucket_factory, rgw_bucket_factory, run_io=True
