@@ -273,5 +273,13 @@ class VaultUnsealFailed(Exception):
     pass
 
 
+class VaultPathCreationFailed(Exception):
+    pass
+
+
+class VaultPolicyCreationFailed(Exception):
+    pass
+
+
 class UnhealthyBucket(Exception):
     pass
