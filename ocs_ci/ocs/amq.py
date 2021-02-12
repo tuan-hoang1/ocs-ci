@@ -450,7 +450,7 @@ class AMQ(object):
         # ToDo: Support multiple topics and users
         producer_pod_objs = [
             get_pod_obj(pod)
-            for pod in get_pod_name_by_pattern("hello-world-produce", namespace)
+            for pod in get_pod_name_by_pattern("hello-world-producer", namespace)
         ]
         for pod in producer_pod_objs:
             for msg in TimeoutSampler(
