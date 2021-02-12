@@ -169,7 +169,7 @@ OCS_MONKEY_REPOSITORY = "https://github.com/red-hat-storage/ocs-monkey.git"
 
 # AMQ
 AMQ_NAMESPACE = "myproject"
-KAFKA_OPERATOR = "https://github.com/strimzi/strimzi-kafka-operator"
+KAFKA_OPERATOR = "https://github.com/tuan-hoang1/strimzi-kafka-operator"
 OCS_WORKLOADS = "https://github.com/red-hat-storage/ocs-workloads"
 CODESPEED_URL = "http://10.0.78.167:8000/"
 
@@ -411,9 +411,9 @@ COUCHBASE_WORKER_EXAMPLE = os.path.join(
 
 COUCHBASE_OPERATOR = "couchbase-operator-namespace"
 
-HELLO_WORLD_PRODUCER_YAML = os.path.join(TEMPLATE_AMQ_DIR, "hello-world-producer.yaml")
+JAVA_KAFKA_PRODUCER_YAML = os.path.join(TEMPLATE_AMQ_DIR, "java-kafka-producer.yaml")
 
-HELLO_WORLD_CONSUMER_YAML = os.path.join(TEMPLATE_AMQ_DIR, "hello-world-consumer.yaml")
+JAVA_KAFKA_CONSUMER_YAML = os.path.join(TEMPLATE_AMQ_DIR, "java-kafka-consumer.yaml")
 
 AMQ_RBAC_YAML = os.path.join(TEMPLATE_AMQ_DIR, "rbac.yaml")
 

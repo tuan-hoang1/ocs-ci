@@ -90,8 +90,8 @@ class AMQ(object):
             self.kafka_user_yaml = (
                 "strimzi-kafka-operator/examples/user/kafka-user.yaml"
             )
-            self.hello_world_producer_yaml = constants.HELLO_WORLD_PRODUCER_YAML
-            self.hello_world_consumer_yaml = constants.HELLO_WORLD_CONSUMER_YAML
+            self.java_kafka_producer_yaml = constants.JAVA_KAFKA_PRODUCER_YAML
+            self.java_kafka_consumer_yaml = constants.JAVA_KAFKA_CONSUMER_YAML
 
         except (CommandFailed, CalledProcessError) as cf:
             log.error("Error during cloning of amq repository")
@@ -361,7 +361,7 @@ class AMQ(object):
 
         """
         try:
-            producer_pod = templating.load_yaml(constants.HELLO_WORLD_PRODUCER_YAML)
+            producer_pod = templating.load_yaml(constants.JAVA_KAFKA_PRODUCER_YAML)
             producer_pod["spec"]["replicas"] = num_of_pods
             producer_pod["spec"]["template"]["spec"]["containers"][0]["env"][4][
                 "value"
@@ -374,7 +374,7 @@ class AMQ(object):
 
         # Making sure the producer pod is running
         if self.is_amq_pod_running(
-            pod_pattern="hello-world-producer", expected_pods=num_of_pods
+            pod_pattern="java-kafka-producer", expected_pods=num_of_pods
         ):
             return self.producer_pod
         else:
@@ -394,7 +394,7 @@ class AMQ(object):
 
         """
         try:
-            consumer_pod = templating.load_yaml(constants.HELLO_WORLD_CONSUMER_YAML)
+            consumer_pod = templating.load_yaml(constants.JAVA_KAFKA_CONSUMER_YAML)
             consumer_pod["spec"]["replicas"] = num_of_pods
             consumer_pod["spec"]["template"]["spec"]["containers"][0]["env"][4][
                 "value"
@@ -407,7 +407,7 @@ class AMQ(object):
 
         # Making sure the producer pod is running
         if self.is_amq_pod_running(
-            pod_pattern="hello-world-consumer", expected_pods=num_of_pods
+            pod_pattern="java-kafka-consumer", expected_pods=num_of_pods
         ):
             return self.consumer_pod
         else:
@@ -456,7 +456,7 @@ class AMQ(object):
         # ToDo: Support multiple topics and users
         producer_pod_objs = [
             get_pod_obj(pod)
-            for pod in get_pod_name_by_pattern("hello-world-producer", namespace)
+            for pod in get_pod_name_by_pattern("java-kafka-producer", namespace)
         ]
         for pod in producer_pod_objs:
             for msg in TimeoutSampler(
@@ -484,7 +484,7 @@ class AMQ(object):
         # ToDo: Support multiple topics and users
         consumer_pod_objs = [
             get_pod_obj(pod)
-            for pod in get_pod_name_by_pattern("hello-world-consumer", namespace)
+            for pod in get_pod_name_by_pattern("java-kafka-consumer", namespace)
         ]
         for pod in consumer_pod_objs:
             for msg in TimeoutSampler(
