@@ -6,6 +6,7 @@ import os
 import tempfile
 import time
 import json
+import platform
 from subprocess import run, CalledProcessError
 from prettytable import PrettyTable
 from concurrent.futures import ThreadPoolExecutor
@@ -23,7 +24,12 @@ from ocs_ci.helpers.helpers import storagecluster_independent_check, validate_pv
 from ocs_ci.ocs.resources.pvc import get_all_pvc_objs
 
 log = logging.getLogger(__name__)
-URL = "https://get.helm.sh/helm-v2.16.1-linux-amd64.tar.gz"
+if platform.machine() == "x86_64":
+    helm_arch = "amd64"
+elif platform.machine() == "s390x":
+    helm_arch = "s390x"
+helm_tar = f"helm-v2.16.1-linux-{helm_arch}.tar.gz"
+URL = f"https://get.helm.sh/{helm_tar}"
 AMQ_BENCHMARK_NAMESPACE = "tiller"
 
 
@@ -590,9 +596,9 @@ class AMQ(object):
         # Install helm cli (version v2.16.0 as we need tiller component)
         # And create tiller pods
         wget_cmd = f"wget -c --read-timeout=5 --tries=0 {URL}"
-        untar_cmd = "tar -zxvf helm-v2.16.1-linux-amd64.tar.gz"
+        untar_cmd = f"tar -zxvf {helm_tar}"
         tiller_cmd = (
-            f"linux-amd64/helm init --tiller-namespace {tiller_namespace}"
+            f"linux-{helm_arch}/helm init --tiller-namespace {tiller_namespace}"
             f" --service-account {tiller_namespace}"
         )
         exec_cmd(cmd=wget_cmd, cwd=self.dir)
@@ -614,7 +620,7 @@ class AMQ(object):
         values = templating.load_yaml(constants.AMQ_BENCHMARK_VALUE_YAML)
         values["numWorkers"] = num_of_clients
         benchmark_cmd = (
-            f"linux-amd64/helm install {constants.AMQ_BENCHMARK_POD_YAML}"
+            f"linux-{helm_arch}/helm install {constants.AMQ_BENCHMARK_POD_YAML}"
             f" --name {benchmark_pod_name} --tiller-namespace {tiller_namespace}"
         )
         exec_cmd(cmd=benchmark_cmd, cwd=self.dir)
@@ -918,7 +924,7 @@ class AMQ(object):
             if self.benchmark:
                 # Delete the helm app
                 try:
-                    purge_cmd = f"linux-amd64/helm delete benchmark --purge --tiller-namespace {tiller_namespace}"
+                    purge_cmd = f"linux-{helm_arch}/helm delete benchmark --purge --tiller-namespace {tiller_namespace}"
                     run(purge_cmd, shell=True, cwd=self.dir, check=True)
                 except (CommandFailed, CalledProcessError) as cf:
                     log.error("Failed to delete help app")
