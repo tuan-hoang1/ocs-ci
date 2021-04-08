@@ -170,7 +170,7 @@ OCS_MONKEY_REPOSITORY = "https://github.com/red-hat-storage/ocs-monkey.git"
 
 # AMQ
 AMQ_NAMESPACE = "myproject"
-KAFKA_OPERATOR = "https://github.com/strimzi/strimzi-kafka-operator"
+KAFKA_OPERATOR = "https://github.com/tuan-hoang1/strimzi-kafka-operator"
 OCS_WORKLOADS = "https://github.com/red-hat-storage/ocs-workloads"
 CODESPEED_URL = "http://10.0.78.167:8000/"
 
@@ -1121,9 +1121,9 @@ SCALE_WORKER_DICT = {
 SCALE_MAX_PVCS_PER_NODE = 500
 
 # Elasticsearch and codespeed constants
-ES_SERVER_IP = "10.0.78.167"
+ES_SERVER_IP = "172.23.143.41"
 ES_SERVER_PORT = "9200"
-ES_SERVER_URL = "https://10.0.78.167:9200"
+ES_SERVER_URL = "https://172.23.143.41:9200"
 
 # Cluster metrics
 THROUGHPUT_QUERY = "(sum(rate(ceph_pool_wr_bytes[1m]) + rate(ceph_pool_rd_bytes[1m])))"

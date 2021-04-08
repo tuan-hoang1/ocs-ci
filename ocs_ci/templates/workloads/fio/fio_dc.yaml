@@ -20,7 +20,7 @@ spec:
           volumeDevices:
             - devicePath: /dev/rbdblock
               name: my-volume
-          command: ["/usr/bin/fio"]
+          command: ["/usr/local/bin/fio"]
           args: ["--name=fio-rand-readwrite",
                  "--filename=/dev/rbdblock",
                  "--readwrite=randrw",

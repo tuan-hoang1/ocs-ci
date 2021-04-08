@@ -5,13 +5,14 @@ metadata:
   namespace: my-ripsaw
 spec:
   elasticsearch:
-    server: 10.0.78.167
+    server: 172.23.143.41
     port: 9200
   clustername: env_ocpversion_ocsversion
   test_user: interface_iopattern
   workload:
     name: "fio_distributed"
     args:
+      image: quay.io/multi-arch/cloud-bulldozer:fio
       prefill: true
       samples: 3
       servers: 50

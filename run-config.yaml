@@ -1,0 +1,26 @@
+RUN:
+  username: 'kubeadmin'
+  password_location: 'auth/kubeadmin-password'
+  log_dir: "/home/tmhoang/github.com/red-hat-storage/ocs-ci/ocs-ci-logs"
+  kubeconfig_location: 'auth/kubeconfig' # relative from cluster_dir
+  bin_dir: '/root/bin'
+  client_version: '4.7.0'
+DEPLOYMENT:
+  force_download_installer: False
+  force_download_client: False
+  ocs_csv_channel: "stable-4.7"
+  ocp_url_template: "http://172.23.143.41:9000/data/mirror.openshift.com/pub/openshift-v4/s390x/clients/ocp/4.7.0/openshift-install-linux-4.7.0.tar.gz"
+  local_storage: True
+  ocs_registry_image: quay.io/rhceph-dev/ocs-registry:latest-4.7
+REPORTING:
+  ocp_must_gather_image: quay.io/rhceph-dev/ocs-must-gather:latest-4.7
+ENV_DATA:
+  cluster_name: 'zocp.ibm.com'
+  storage_cluster_name: 'ocs-storagecluster'
+  storage_device_sets_name: "ocs-deviceset"
+  cluster_namespace: 'openshift-storage'
+  ocs_version: '4.7'
+  skip_ocp_deployment: true
+  skip_ocs_deployment: true
+  platform: 'baremetal'
+  deployment_type: 'ipi'

@@ -1,9 +1,9 @@
 ---
 # Config file for nightly OCP 4.7
 RUN:
-  client_version: "4.7.0-0.nightly"
+  client_version: "4.7.0"
 DEPLOYMENT:
-  installer_version: "4.7.0-0.nightly"
+  installer_version: "4.7.0"
   terraform_version: "0.12.26"
 ENV_DATA:
   vm_template: "rhcos-47.83.202102090044-0-vmware.x86_64"

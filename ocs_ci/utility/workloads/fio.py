@@ -41,14 +41,16 @@ def setup(**kwargs):
     # For first cut doing simple fio install
     distro = find_distro(io_pod)
     pkg_mgr = DISTROS[distro]
+    fio_pkgs = "fio"
 
     if distro == "Debian":
         cmd = f"{pkg_mgr} update"
         io_pod.exec_cmd_on_pod(cmd, out_yaml_format=False)
         log.info("Sleep 5 seconds after update to make sure the lock is released")
         sleep(5)
+        fio_pkgs = f"apt-utils {fio_pkgs}"
 
-    cmd = f"{pkg_mgr} -y install fio"
+    cmd = f"{pkg_mgr} -y install {fio_pkgs}"
     return io_pod.exec_cmd_on_pod(cmd, out_yaml_format=False)
 
 

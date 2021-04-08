@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: hello-world-producer
-        image: strimzi/hello-world-producer:latest
+        image: quay.io/multi-arch/strimzi-examples:java-kafka-producer
         env:
           - name: BOOTSTRAP_SERVERS
             value: my-cluster-kafka-bootstrap:9092

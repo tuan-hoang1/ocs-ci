@@ -52,7 +52,7 @@ class TestRegistryPullAndPushImagestoRegistry(E2ETest):
         image_pull_and_push(
             project_name=self.project_name,
             template="eap-cd-basic-s2i",
-            image="registry.redhat.io/jboss-eap-7-tech-preview/eap-cd-openshift-rhel8:latest",
+            image="registry.redhat.io/jboss-eap-7/eap73-openj9-11-openshift-rhel8:latest",
             pattern="eap-app",
         )
 
